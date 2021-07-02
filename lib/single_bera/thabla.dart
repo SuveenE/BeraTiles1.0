@@ -1,0 +1,268 @@
+import 'package:flutter/material.dart';
+import 'package:bera_tiles/screens/home_screen.dart';
+import 'package:bera_tiles/screens/drums.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+class Thabla extends StatefulWidget {
+  static String id='thabla';
+  @override
+  _ThablaState createState() => _ThablaState();
+}
+
+class _ThablaState extends State<Thabla> {
+  void playSound(int soundNumber) {
+    final player = AudioCache();
+    player.play('note$soundNumber.wav'); //note1-gataberaya , note2-thammattama
+  }
+  Color kwhite =Colors.white;
+  Color kblack=Colors.black;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kblack,
+        elevation: 0.0,
+        centerTitle: false,
+        title:  Row(
+          children: [
+            SizedBox(width: MediaQuery. of(context). size. width-245.7),
+            Image.asset(
+              "images/logo7.png",
+              width:  33.0,
+              height: 40.0,
+            ),
+            SizedBox(width:5.0),
+            Text('Bera Tiles',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+                fontFamily:'Acme',
+              ),
+            ),
+          ],
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: kwhite),
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+
+      ),
+      body: ListView(
+          children: [Container(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: kwhite,
+                    thickness: 1.0,
+                  ),
+                  SizedBox(height: 1.0,),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: (MediaQuery. of(context). size. height-200)/3,
+                                  width: MediaQuery. of(context). size. width,
+                                  margin: EdgeInsets.only(left: 15.0, right:
+                                  7, top: 15.0, bottom: 15.0),
+                                  decoration: BoxDecoration(
+                                    color: kwhite,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                      gradient: RadialGradient(
+                                          colors: [ Colors.white,Colors.red,])
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Text(
+                                    'Thabla',
+                                    style: TextStyle(
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:'Varela',
+                                        color: kblack
+                                    ),
+                                  ),
+                                  left:(MediaQuery. of(context). size. width-80)/2,
+                                  top: 22.0,
+                                ),
+                                Positioned(
+                                  left: MediaQuery. of(context). size. width/2-70,
+                                  top: (MediaQuery. of(context). size. height-200)/6-20,
+                                  child: Hero(
+                                    tag: 'thabla',
+                                    child: Container(
+                                      width: 130.0,
+                                      height: 110.0,
+                                      child: Container(
+                                        height: (MediaQuery. of(context). size. height-200)/3,
+                                        width: MediaQuery. of(context). size. width/2,
+                                        child: Image.asset('decos/thablla.png',
+                                          color: Colors.black,),
+                                      ),
+                                    ),
+                                  ),
+
+                                ),
+                              ],
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            InkWell(
+                                enableFeedback: false,
+                                onTap: (){
+                                  playSound(21);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: (MediaQuery. of(context). size. height-200)/3,
+                                      width: MediaQuery. of(context). size. width,
+                                      margin: EdgeInsets.only(left: 15.0, right:
+                                      7, top: 15.0, bottom: 15.0),
+                                      decoration: BoxDecoration(
+                                          border:Border.all(width: 5,color: Color(0xFFCD1E3B)) ,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                          gradient: RadialGradient(
+                                              colors: [Colors.white,Color(0xFFFF2800) ])
+                                      ),
+                                    ),
+                                    // Positioned(
+                                    //   child: Text(
+                                    //     'LEFT',
+                                    //     style: TextStyle(
+                                    //       fontSize: 25.0,
+                                    //       fontWeight: FontWeight.bold,
+                                    //       fontFamily:'Varela',
+                                    //       color: kblack
+                                    //     ),
+                                    //   ),
+                                    //   left: 70.0,
+                                    //   top: 22.0,
+                                    // ),
+                                  ],
+                                )
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            InkWell(
+                                enableFeedback: false,
+                                onTap: (){
+                                  playSound(22);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: (MediaQuery. of(context). size. height-200)/3,
+                                      width: MediaQuery. of(context). size. width,
+                                      margin: EdgeInsets.only(left: 13.0, right:
+                                      9, top: 15.0, bottom: 15.0),
+                                      decoration: BoxDecoration(
+                                          border:Border.all(width: 5,color: Color(0xFFFFFF00)) ,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                          gradient: RadialGradient(
+                                              colors: [Colors.white,Color(0xFFF9A602) ])
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            InkWell(
+                                enableFeedback: false,
+                                onTap: (){
+                                  playSound(27);//27
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: (MediaQuery. of(context). size. height-200)/3,
+                                      width: MediaQuery. of(context). size. width,
+                                      margin: EdgeInsets.only(left: 15.0, right:
+                                      7, top: 15.0, bottom: 15.0),
+                                      decoration: BoxDecoration(
+                                          border:Border.all(width: 5,color: Color(0xFFFFFF00)) ,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                          gradient: RadialGradient(
+                                              colors: [Colors.white,Color(0xFFFDA50F) ])
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            InkWell(
+                                enableFeedback: false,
+                                onTap: (){
+                                  playSound(28);//28
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: (MediaQuery. of(context). size. height-200)/3,
+                                      width: MediaQuery. of(context). size. width,
+                                      margin: EdgeInsets.only(left: 13.0, right:
+                                      9, top: 15.0, bottom: 15.0),
+                                      decoration: BoxDecoration(
+                                          border:Border.all(width: 5,color: Color(0xFFF9A602)) ,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                          gradient: RadialGradient(
+                                              colors: [Colors.white,Color(0xFFFCE205) ])
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ]),
+          ),
+          ]),
+    );
+  }
+}
