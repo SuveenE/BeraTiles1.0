@@ -409,7 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Stack(
                         children: [
                           Container(
-                            height: (MediaQuery. of(context). size.height-128.0)/3,
+                            height: (MediaQuery. of(context). size.height-128.0)/3.5,
                             width: MediaQuery. of(context). size. width,
                             margin: EdgeInsets.all(15.0),
                             decoration: BoxDecoration(
@@ -429,7 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             left: 33.0,
-                            top: (MediaQuery. of(context). size.height-128.0)/8,
+                            top: (MediaQuery. of(context). size.height-128.0)/9,
                           ),
                           Positioned(
                               left: MediaQuery. of(context). size. width-95.0,
@@ -450,10 +450,53 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             left: 33.0,
-                            top: (MediaQuery. of(context). size. height-128.0)/8+48,
+                            top: (MediaQuery. of(context). size. height-128.0)/9+48,
                           ),
                         ],
                       )
+                  ),
+                  Container(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, berabeats.id);},
+                      child: Stack(
+                        children: [Container(
+                          height: (MediaQuery. of(context). size. height-300)/5.5,
+                          width: MediaQuery. of(context). size. width,
+                          margin: EdgeInsets.all(15.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                              gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [Colors.red, Colors.yellow])
+                          ),
+                        ),
+                          Positioned(
+                            child: Text(
+                              'BERA BEATS   Challenge',
+                              style: TextStyle(
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily:'Acme',
+                              ),
+                            ),
+                            left: 55.0,
+                            top:(MediaQuery. of(context). size. height-300)/10-10,
+                          ),
+                          Positioned(
+                            child: Image.asset(
+                              "images/trophy.png",
+                              width:  28.0,
+                              height: 28.0,
+                            ),
+                            left: 20.0,
+                            top:(MediaQuery. of(context). size. height-300)/10-5,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   Row(
                     children: [

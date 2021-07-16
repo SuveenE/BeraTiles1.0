@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'note.dart';
 import 'tile.dart';
 
-class Line extends AnimatedWidget {
+class Line1 extends AnimatedWidget {
   final int lineNumber;
   final List<Note> currentNotes;
   final Function(Note) onTileTap;
 
 
-  const Line(
+  const Line1(
       {Key key,
         this.currentNotes,
         this.onTileTap,

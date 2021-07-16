@@ -43,4 +43,5 @@
             android:value="ca-app-pub-6659979212727106~6350844567" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+<!--    <uses-permission android:name="android.permission.GET_TASKS"/>-->
 </manifest>

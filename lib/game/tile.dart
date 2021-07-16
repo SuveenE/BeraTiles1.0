@@ -17,7 +17,7 @@ class Tile extends StatelessWidget {
         onTapDown: (_) => onTap(),
         child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 6,color:color2) ,
+          border: Border.all(width: 4,color:color2) ,
             gradient: RadialGradient(
                 colors: [ color1,color])
         ),
@@ -29,40 +29,40 @@ class Tile extends StatelessWidget {
   Color get color{
     switch (state) {
       case NoteState.ready:
-        return Color(0xFFF6B915);
+        return Color(0xFF0492C2);
       case NoteState.tapped:
         return Colors.white10;
       case NoteState.missed:
         return Colors.red;
         break;
       default:
-        return  Color(0xFFF6B915);
+        return  Color(0xFF0492C2);
     }
   }
   Color get color1{
     switch (state) {
       case NoteState.ready:
-        return Color(0xFFF6E271);
+        return Color(0xFF0492C2);
       case NoteState.tapped:
         return Colors.white10;
       case NoteState.missed:
         return Colors.red;
         break;
       default:
-        return Color(0xFFF6E271);
+        return Color(0xFF0492C2);
     }
   }
   Color get color2{
     switch (state) {
       case NoteState.ready:
-        return Color(0xFFF38E09);
+        return  Color(0xFF1F456E);
       case NoteState.tapped:
         return Colors.black54;
       case NoteState.missed:
         return Color(0xFFB10603);
         break;
       default:
-        return Color(0xFFF38E09);
+        return  Color(0xFF1F456E);
     }
   }
 }

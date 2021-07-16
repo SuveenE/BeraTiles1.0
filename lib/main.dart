@@ -6,6 +6,7 @@ import 'package:bera_tiles/screens/privacypolicy.dart';
 import 'package:bera_tiles/single_bera/bongo.dart';
 import 'package:bera_tiles/single_bera/gataberaya.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'single_bera/udakkiya.dart';
@@ -20,26 +21,29 @@ import 'package:bera_tiles/game/game_screen2.dart';
 import 'package:bera_tiles/game/game_home.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:bera_tiles/game/ad_state.dart';
+import 'package:bera_tiles/game/level1.dart';
+import 'package:bera_tiles/game/level2.dart';
+import 'package:bera_tiles/game/level3.dart';
+import 'package:bera_tiles/game/level4.dart';
+import 'package:bera_tiles/game/level5.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final initFuture = MobileAds.instance.initialize();
-  final adState = AdState(initFuture);
-  runApp(
-      Provider.value(
-        value: adState,
-        builder: (context, child)=>
-          BeraApp()
-  ),
-  );
+  // await UserSimplePreferences.init();
+  runApp(BeraApp());
 }
 
 
-class BeraApp extends StatelessWidget {
-  @override
+class BeraApp extends StatefulWidget {
 
-  Widget build(BuildContext context) {
-    return  MaterialApp(
+  @override
+  State<BeraApp> createState() => _BeraAppState();
+}
+
+class _BeraAppState extends State<BeraApp> with WidgetsBindingObserver{
+  @override
+  Widget build(BuildContext context) {return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.black,
@@ -64,6 +68,11 @@ class BeraApp extends StatelessWidget {
         Game.id: (context)=>Game(),
         Game1.id: (context)=>Game1(),
         Game2.id: (context)=>Game2(),
+        Game3.id: (context)=>Game3(),
+        Game4.id: (context)=>Game4(),
+        Game5.id: (context)=>Game5(),
+        Game6.id: (context)=>Game6(),
+        Game7.id: (context)=>Game7(),
         Gamehome.id: (context)=>Gamehome(),
       },
     );

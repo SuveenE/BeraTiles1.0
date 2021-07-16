@@ -1,3 +1,4 @@
+import 'package:bera_tiles/screens/berabeats.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +6,7 @@ import 'game_screen.dart';
 import 'game_screen1.dart';
 import 'game_screen2.dart';
 import 'ad_state.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Gamehome extends StatefulWidget {
   static String id='gamehome';
@@ -13,21 +15,26 @@ class Gamehome extends StatefulWidget {
 }
 
 class _GamehomeState extends State<Gamehome> {
-  BannerAd banner;
+  AudioCache player =new AudioCache() ;
+  AudioCache player1 ;
+  AudioPlayer advancedPlayer = new AudioPlayer();
+  // BannerAd banner;
 
   @override void didChangeDependencies() {
+    player1= AudioCache(fixedPlayer: advancedPlayer);
+    advancedPlayer.stop();
     super.didChangeDependencies();
-    final adState= Provider.of<AdState>(context);
-    adState.initialization.then((status){
-      setState(() {
-        banner = BannerAd(
-            adUnitId: "ca-app-pub-6659979212727106/6714834311",
-            size: AdSize.banner,
-            request: AdRequest(),
-          listener: adState.adListener,
-        )..load();
-      });
-    });
+    // final adState= Provider.of<AdState>(context);
+    // adState.initialization.then((status){
+    //   setState(() {
+    //     banner = BannerAd(
+    //         adUnitId: "ca-app-pub-6659979212727106/6714834311",
+    //         size: AdSize.banner,
+    //         request: AdRequest(),
+    //       listener: adState.adListener,
+    //     )..load();
+    //   });
+    // });
   }
 
   Color kwhite =Colors.white;
@@ -68,212 +75,133 @@ class _GamehomeState extends State<Gamehome> {
       body: Column(
         children: [
           Container(
-            child: Stack(
-              children: [
-                InkWell(
-                  onTap: () {
-                      Navigator.pushNamed(context, Game.id);},
-                  child: Container(
-                    height: (MediaQuery. of(context). size. height-250)/3,
-                    width: MediaQuery. of(context). size. width,
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
+            child: InkWell(
+              onTap: () {
+                  Navigator.pushNamed(context, Game.id);},
+              child: Stack(
+                children: [
+                  Container(
+                      height: (MediaQuery. of(context). size. height-230)/3,
+                      width: MediaQuery. of(context). size. width,
+                      margin: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
 
+                      ),
                     ),
+                  Positioned(
+                      left: MediaQuery. of(context). size. width-95.0,
+                      top: 29,
+                      child:Container(
+                        width: 80.0,
+                        child: Image.asset('images/yaka2.jpg'),
+                      )
                   ),
-                ),
-                // Positioned(
-                //   child: Image.asset(
-                //     "images/email.png",
-                //     width:  70.0,
-                //     height: 80.0,
-                //     color: Colors.black,
-                //   ),
-                //   left: 33.0,
-                //   top: (MediaQuery. of(context). size. height-190)/6-32,
-                // ),
-                Positioned(
-                    left: MediaQuery. of(context). size. width-95.0,
-                    top: 29,
-                    child:Container(
-                      width: 80.0,
-                      child: Image.asset('images/yaka2.jpg'),
-                    )
-                ),
-                Positioned(
-                  child: Text(
-                    'EASY',
-                    style: TextStyle(
-                      fontSize: 36.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily:'Acme',
+                  Positioned(
+                    child: Text(
+                      'EASY',
+                      style: TextStyle(
+                        fontSize: 36.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily:'Acme',
+                      ),
                     ),
+                    left: 120.0,
+                    top:(MediaQuery. of(context). size. height-230)/6-10,
                   ),
-                  left: 120.0,
-                  top:(MediaQuery. of(context). size. height-250)/6-22,
-                ),
-                // Positioned(
-                //   child: Text(
-                //     'beratiles@gmail.com',
-                //     style: TextStyle(
-                //       fontSize: 14.0,
-                //       fontWeight: FontWeight.bold,
-                //       fontFamily:'Montserrat',
-                //     ),
-                //   ),
-                //   left: 120.0,
-                //   top:(MediaQuery. of(context). size. height-190)/6+13,
-                // ),
-              ],
+                ],
+              ),
             ),
           ),
           Container(
-            child: Stack(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Game1.id);},
-                  child: Container(
-                    height:  (MediaQuery. of(context). size. height-250)/3,
-                    width: MediaQuery. of(context). size. width,
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
+            child: InkWell(
+              onTap: () {
+                      Navigator.pushNamed(context, Game1.id);},
+              child: Stack(
+                children: [
+                  Container(
+                      height:  (MediaQuery. of(context). size. height-230)/3,
+                      width: MediaQuery. of(context). size. width,
+                      margin: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
 
+                      ),
                     ),
+                  Positioned(
+                      left: MediaQuery. of(context). size. width-95.0,
+                      top: 29,
+                      child:Container(
+                        width: 80.0,
+                        child: Image.asset('images/yaka3.jpg'),
+                      )
                   ),
-                ),
-                // Positioned(
-                //   left: 33.0,
-                //   top: (MediaQuery. of(context). size. height-190)/6-32,
-                //   child: InkWell(
-                //     onTap: (){
-                //
-                //     },
-                //     child: Image.asset(
-                //       "images/facebook.png",
-                //       width:  70.0,
-                //       height: 80.0,
-                //       color: Colors.black,
-                //     ),
-                //   ),
-                // ),
-                Positioned(
-                    left: MediaQuery. of(context). size. width-95.0,
-                    top: 29,
-                    child:Container(
-                      width: 80.0,
-                      child: Image.asset('images/yaka3.jpg'),
-                    )
-                ),
-                Positioned(
-                  child: Text(
-                    'MEDIUM',
-                    style: TextStyle(
-                      fontSize: 36.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily:'Acme',
+                  Positioned(
+                    child: Text(
+                      'MEDIUM',
+                      style: TextStyle(
+                        fontSize: 36.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily:'Acme',
+                      ),
                     ),
+                    left: 120.0,
+                    top:(MediaQuery. of(context). size. height-230)/6-10,
                   ),
-                  left: 120.0,
-                  top:(MediaQuery. of(context). size. height-250)/6-22,
-                ),
-                // Positioned(
-                //   child: Text(
-                //     'Facebook',
-                //     style: TextStyle(
-                //       fontSize: 14.0,
-                //       fontWeight: FontWeight.bold,
-                //       fontFamily:'Montserrat',
-                //     ),
-                //   ),
-                //   left: 150.0,
-                //   top:(MediaQuery. of(context). size. height-190)/6+13,
-                // ),
-              ],
+                ],
+              ),
             ),
           ),
           Container(
-            child: Stack(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Game2.id);},
-                  child: Container(
-                    height:  (MediaQuery. of(context). size. height-250)/3,
-                    width: MediaQuery. of(context). size. width,
-                    margin: EdgeInsets.all(15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Game2.id);},
+              child: Stack(
+                children: [
+                  Container(
+                      height:  (MediaQuery. of(context). size. height-230)/3,
+                      width: MediaQuery. of(context). size. width,
+                      margin: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
 
+                      ),
                     ),
+                  Positioned(
+                      left: MediaQuery. of(context). size. width-95.0,
+                      top: 29,
+                      child:Container(
+                        width: 80.0,
+                        child: Image.asset('images/yaka4.jpg'),
+                      )
                   ),
-                ),
-                // Positioned(
-                //   left: 23.0,
-                //   top: (MediaQuery. of(context). size. height-190)/6-32,
-                //   child: InkWell(
-                //     onTap: (){
-                //
-                //     },
-                //     child: Container(
-                //       width:  100.0,
-                //       height: 80.0,
-                //       child: Image.asset(
-                //         "images/instagram2.png",
-                //         width:  100.0,
-                //         height: 80.0,
-                //         color: Colors.black,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Positioned(
-                    left: MediaQuery. of(context). size. width-95.0,
-                    top: 29,
-                    child:Container(
-                      width: 80.0,
-                      child: Image.asset('images/yaka4.jpg'),
-                    )
-                ),
-                Positioned(
-                  child: Text(
-                    'HARD',
-                    style: TextStyle(
-                      fontSize: 36.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily:'Acme',
+                  Positioned(
+                    child: Text(
+                      'HARD',
+                      style: TextStyle(
+                        fontSize: 36.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily:'Acme',
+                      ),
                     ),
+                    left: 120.0,
+                    top:(MediaQuery. of(context). size. height-230)/6-10,
                   ),
-                  left: 120.0,
-                  top:(MediaQuery. of(context). size. height-250)/6-22,
-                ),
-                // Positioned(
-                //   child: Text(
-                //     'Instagram',
-                //     style: TextStyle(
-                //       fontSize: 14.0,
-                //       fontWeight: FontWeight.bold,
-                //       fontFamily:'Montserrat',
-                //     ),
-                //   ),
-                //   left: 150.0,
-                //   top:(MediaQuery. of(context). size. height-190)/6+13,
-                // ),
-              ],
+                ],
+              ),
             ),
           ),
-          if (banner==null)
-            SizedBox(height: 50.0)
-          else
-            Container(
-              height: 50.0,
-              child: AdWidget(ad: banner,),
-            )
+
+          // if (banner==null)
+          //   SizedBox(height: 50.0)
+          // else
+          //   Container(
+          //     height: 50.0,
+          //     child: AdWidget(ad: banner,),
+          //   )
         ],
       ),
 

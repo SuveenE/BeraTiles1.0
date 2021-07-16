@@ -43,8 +43,8 @@ android {
         applicationId "com.suveen.bera_tiles_1"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1.1"
     }
 
     signingConfigs {

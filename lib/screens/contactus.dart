@@ -142,26 +142,26 @@ class _ContactusState extends State<Contactus> {
                 ),
                 Positioned(
                   child: Text(
-                    'Like us on',
+                    'Like us',
                     style: TextStyle(
                       fontSize: 26.0,
                       fontWeight: FontWeight.bold,
                       fontFamily:'Varela',
                     ),
                   ),
-                  left: 120.0,
+                  left: 125.0,
                   top:(MediaQuery. of(context). size. height-190)/6-22,
                 ),
                 Positioned(
                   child: Text(
-                    'Facebook',
+                    'Bera Tiles',
                     style: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold,
                       fontFamily:'Montserrat',
                     ),
                   ),
-                  left: 150.0,
+                  left: 135.0,
                   top:(MediaQuery. of(context). size. height-190)/6+13,
                 ),
               ],
@@ -193,7 +193,7 @@ class _ContactusState extends State<Contactus> {
                       child: Image.asset(
                         "images/instagram2.png",
                         width:  100.0,
-                        height: 80.0,
+                        height: 120.0,
                         color: Colors.black,
                       ),
                     ),
@@ -209,27 +209,27 @@ class _ContactusState extends State<Contactus> {
                 ),
                 Positioned(
                   child: Text(
-                    'Follow us on',
+                    'Follow us',
                     style: TextStyle(
                       fontSize: 26.0,
                       fontWeight: FontWeight.bold,
                       fontFamily:'Varela',
                     ),
                   ),
-                  left: 120.0,
+                  left: 135.0,
                   top:(MediaQuery. of(context). size. height-190)/6-22,
                 ),
                 Positioned(
                   child: Text(
-                    'Instagram',
+                    '@beratiles',
                     style: TextStyle(
-                      fontSize: 14.0,
+                      fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                       fontFamily:'Montserrat',
                     ),
                   ),
                   left: 150.0,
-                  top:(MediaQuery. of(context). size. height-190)/6+13,
+                  top:(MediaQuery. of(context). size. height-190)/6+10,
                 ),
               ],
             ),

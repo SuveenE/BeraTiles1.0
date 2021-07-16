@@ -3,7 +3,7 @@ import 'note.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'tile.dart';
 import 'line_divider.dart';
-import 'line.dart';
+import 'line2.dart';
 import 'song_provider.dart';
 
 
@@ -14,19 +14,24 @@ class Game2 extends StatefulWidget {
   _Game2State createState() => _Game2State();
 }
 
-class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
+class _Game2State extends State<Game2> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
 
   AudioCache player = new AudioCache();
+  AudioCache player1 ;
+  AudioPlayer advancedPlayer = new AudioPlayer();
   List<Note> notes = initNotes();
   AnimationController animationController;
   int currentNoteIndex = 0;
   int points = 0;
+  // int highscore2=0;
   bool hasStarted = false;
   bool isPlaying = true;
 
   @override
   void initState() {
+    player1= AudioCache(fixedPlayer: advancedPlayer);
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 220));
     animationController.addStatusListener((status) {
@@ -40,7 +45,7 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
           animationController.reverse().then((_) => _showFinishDialog());
         } else if (currentNoteIndex == notes.length - 5) {
           //song finished
-          _showFinishDialog();
+          _showFinishDialog1();
         } else {
           setState(() => ++currentNoteIndex);
           animationController.forward(from: 0);
@@ -48,67 +53,91 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
       }
     });
   }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+
+    super.didChangeAppLifecycleState(state);
+    print('AppLifecycleState: $state');
+    if(state==AppLifecycleState.paused){
+      advancedPlayer.stop();
+      animationController.reverse().then((_) => _showFinishDialog());
+    }
+  }
+
 
   @override
   void dispose() {
-    animationController.dispose();
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    animationController.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0.0,
-        centerTitle: false,
-        title:  Row(
-          children: [
-            SizedBox(width: MediaQuery. of(context). size. width-245.7),
-            Image.asset(
-              "images/logo7.png",
-              width:  33.0,
-              height: 40.0,
-            ),
-            SizedBox(width:5.0),
-            Text('Bera Tiles',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-                fontFamily:'Acme',
+    return WillPopScope(
+        onWillPop: ()async{
+          Navigator.pop(context);
+          advancedPlayer.stop();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 0.0,
+          centerTitle: false,
+          title:  Row(
+            children: [
+              SizedBox(width: MediaQuery. of(context). size. width-245.7),
+              Image.asset(
+                "images/logo7.png",
+                width:  33.0,
+                height: 40.0,
               ),
-            ),
-          ],
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-
-      ),
-      body: Stack(
-        fit: StackFit.passthrough,
-        children: <Widget>[
-          // Image.asset(
-          //   'images/background.jpg',
-          //   fit:BoxFit.cover,
-          // ),
-          Row(
-            children: <Widget>[
-              _drawLine(0),
-              // LineDivider(),
-              _drawLine(1),
-              // LineDivider(),
-              _drawLine(2),
-              // LineDivider(),
-              _drawLine(3),
+              SizedBox(width:5.0),
+              Text('Bera Tiles',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily:'Acme',
+                ),
+              ),
             ],
           ),
-          _drawPoints(),
-        ],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: (){
+              advancedPlayer.stop();
+              Navigator.pop(context);
+            },
+          ),
+
+        ),
+        body: Stack(
+          fit: StackFit.passthrough,
+          children: <Widget>[
+            // Image.asset(
+            //   'images/background.jpg',
+            //   fit:BoxFit.cover,
+            // ),
+            Row(
+              children: <Widget>[
+                _drawLine(0),
+                // LineDivider(),
+                _drawLine(1),
+                // LineDivider(),
+                _drawLine(2),
+                // LineDivider(),
+                _drawLine(3),
+              ],
+            ),
+            // Align
+            //   ( alignment: Alignment.topCenter,
+            //     child: Text("HS= $highscore2",
+            //       style: TextStyle(color: Colors.white, fontSize: 30,
+            //           fontFamily: 'Montserrat'),
+            //     )),
+            _drawPoints(),
+          ],
+        ),
       ),
     );
   }
@@ -125,6 +154,12 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
   }
 
   void _showFinishDialog() {
+    // if(points> highscore2){
+    //   setState(() {
+    //     highscore2=points;
+    //   });
+    // }
+    advancedPlayer.stop();
     showDialog(
       context: context,
       builder: (context) {
@@ -148,6 +183,12 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
     ).then((_) => _restart());
   }
   void _showFinishDialog1() {
+    // if(points> highscore2){
+    //   setState(() {
+    //     highscore2=points;
+    //   });
+    // }
+    advancedPlayer.stop();
     showDialog(
       context: context,
       builder: (context) {
@@ -181,6 +222,7 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
         setState(() => hasStarted = true);
         animationController.forward();
       }
+      _BackgroundMusic();
       _playNote(note);
       setState(() {
         note.state = NoteState.tapped;
@@ -191,7 +233,7 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
 
   _drawLine(int lineNumber) {
     return Expanded(
-      child: Line(
+      child: Line2(
         lineNumber: lineNumber,
         currentNotes: notes.sublist(currentNoteIndex, currentNoteIndex + 5),
         onTileTap: _onTap,
@@ -213,21 +255,52 @@ class _Game2State extends State<Game2> with SingleTickerProviderStateMixin {
       ),
     );
   }
-
+  void _BackgroundMusic() {
+    if (points == 1) {
+      player1.play('Bera-tiles_1.mp3');
+    }
+  }
   _playNote(Note note) {
     switch (note.line) {
       case 0:
-        player.play('note22.wav');
+        player.play('note29.wav');
         return;
       case 1:
-        player.play('note90.wav');
+        player.play('note30.wav');
         return;
       case 2:
-        player.play('note91.wav');
+        player.play('note31.wav');
         return;
       case 3:
-        player.play('note92.wav');
+        player.play('note32.wav');
         return;
     }
   }
 }
+
+
+  // @override
+  // init1() {
+  //   player1 = AudioCache(fixedPlayer: advancedPlayer);
+  //   WidgetsBinding.instance.addObserver(this);
+  // }
+  //
+  // @override
+  // Future<void> dispose() async {
+  //   WidgetsBinding.instance.removeObserver(this);
+  //   super.dispose();
+  //   await advancedPlayer.stop();
+  // }
+  //
+  // @override
+  // void didChangeAPpLifecycleState(AppLifecycleState state) {
+  //   super.didChangeAppLifecycleState(state);
+  //
+  //   if (state == AppLifecycleState.inactive ||
+  //       state == AppLifecycleState.detached) return;
+  //
+  //
+  //   if (state == AppLifecycleState.paused) {
+  //     advancedPlayer.stop();
+  //   }
+  // }
